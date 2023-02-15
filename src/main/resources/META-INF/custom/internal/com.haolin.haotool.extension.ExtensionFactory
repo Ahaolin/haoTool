@@ -1,0 +1,2 @@
+adaptive=com.haolin.haotool.extension.factory.AdaptiveExtensionFactory
+spi=com.haolin.haotool.extension.factory.SpiExtensionFactory

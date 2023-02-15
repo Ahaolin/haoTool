@@ -1,0 +1,3 @@
+adaptive=com.haolin.haotool.extension.compiler.support.AdaptiveCompiler
+jdk=com.haolin.haotool.extension.compiler.support.JdkCompiler
+javassist=com.haolin.haotool.extension.compiler.support.JavassistCompiler

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite tests="15" failures="0" name="com.alibaba.dubbo.common.extensionloader.ExtensionLoader_Adaptive_UseJdkCompiler_Test" time="0.002" errors="0" skipped="0">
+  <properties>
+    <property name="idea.version" value="2021.1"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="C:\Tools\DevTools\java\java8\jre\bin"/>
+    <property name="java.vm.version" value="25.291-b10"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\Project\Projects\MINE\1_demo\haoTool"/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="path.separator" value=";"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.script" value=""/>
+    <property name="user.country" value="CN"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="C:\Project\Projects\MINE\1_demo\haoTool"/>
+    <property name="java.runtime.version" value="1.8.0_291-b10"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="C:\Tools\DevTools\java\java8\jre\lib\endorsed"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="C:\Users\10647\AppData\Local\Temp\"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="maven.ext.class.path" value="C:\Tools\DevTools\viewTools\IntelliJ IDEA 2021.1\plugins\maven\lib\maven-event-listener.jar"/>
+    <property name="classworlds.conf" value="C:\Tools\DevTools\server\apache-maven-3.5.4\bin\m2.conf"/>
+    <property name="sun.jnu.encoding" value="GBK"/>
+    <property name="java.library.path" value="C:\Tools\DevTools\java\java8\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Tools\DevTools\java\java8\bin;C:\Tools\DevTools\java\java8\jre\bin;C:\Tools\DevTools\server\apache-maven-3.5.4\bin;C:\Tools\DevTools\viewTools\Git\cmd;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Pandoc\;C:\Program Files\dotnet\;C:\Tools\DevTools\python\3.80\Scripts\;C:\Tools\DevTools\python\3.80\;C:\Users\10647\AppData\Local\Microsoft\WindowsApps;C:\Tools\DevTools\viewTools\Microsoft VS Code\bin;C:\Tools\DevTools\server\mysql\bin;."/>
+    <property name="maven.conf" value="C:\Tools\DevTools\server\apache-maven-3.5.4/conf"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="52.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="10.0"/>
+    <property name="user.home" value="C:\Users\10647"/>
+    <property name="user.timezone" value="Asia/Shanghai"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="user.name" value="10647"/>
+    <property name="java.class.path" value="C:\Tools\DevTools\server\apache-maven-3.5.4\boot\plexus-classworlds-2.5.2.jar;C:\Tools\DevTools\viewTools\IntelliJ IDEA 2021.1\lib\idea_rt.jar"/>
+    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="C:\Tools\DevTools\java\java8\jre"/>
+    <property name="sun.java.command" value="org.codehaus.classworlds.Launcher -Didea.version=2021.1 -s C:\Tools\DevTools\server\apache-maven-3.5.4\conf\settings.xml install"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language" value="zh"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.8.0_291"/>
+    <property name="java.ext.dirs" value="C:\Tools\DevTools\java\java8\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
+    <property name="sun.boot.class.path" value="C:\Tools\DevTools\java\java8\jre\lib\resources.jar;C:\Tools\DevTools\java\java8\jre\lib\rt.jar;C:\Tools\DevTools\java\java8\jre\lib\sunrsasign.jar;C:\Tools\DevTools\java\java8\jre\lib\jsse.jar;C:\Tools\DevTools\java\java8\jre\lib\jce.jar;C:\Tools\DevTools\java\java8\jre\lib\charsets.jar;C:\Tools\DevTools\java\java8\jre\lib\jfr.jar;C:\Tools\DevTools\java\java8\jre\classes"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="C:\Tools\DevTools\server\apache-maven-3.5.4"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase classname="com.alibaba.dubbo.common.extensionloader.ExtensionLoader_Adaptive_UseJdkCompiler_Test" name="test_getAdaptiveExtension_ExceptionWhenNoAdaptiveMethodOnInterface" time="0"/>
+  <testcase classname="com.alibaba.dubbo.common.extensionloader.ExtensionLoader_Adaptive_UseJdkCompiler_Test" name="test_getAdaptiveExtension_InjectNotExtFail" time="0"/>
+  <testcase classname="com.alibaba.dubbo.common.extensionloader.ExtensionLoader_Adaptive_UseJdkCompiler_Test" name="test_useAdaptiveClass" time="0"/>
+  <testcase classname="com.alibaba.dubbo.common.extensionloader.ExtensionLoader_Adaptive_UseJdkCompiler_Test" name="test_getAdaptiveExtension_customizeAdaptiveKey" time="0.001"/>
+  <testcase classname="com.alibaba.dubbo.common.extensionloader.ExtensionLoader_Adaptive_UseJdkCompiler_Test" name="test_urlHolder_getAdaptiveExtension_noExtension" time="0"/>
+  <testcase classname="com.alibaba.dubbo.common.extensionloader.ExtensionLoader_Adaptive_UseJdkCompiler_Test" name="test_getAdaptiveExtension_ExceptionWhenNotAdaptiveMethod" time="0"/>
+  <testcase classname="com.alibaba.dubbo.common.extensionloader.ExtensionLoader_Adaptive_UseJdkCompiler_Test" name="test_getAdaptiveExtension_protocolKey" time="0"/>
+  <testcase classname="com.alibaba.dubbo.common.extensionloader.ExtensionLoader_Adaptive_UseJdkCompiler_Test" name="test_getAdaptiveExtension_UrlNpe" time="0"/>
+  <testcase classname="com.alibaba.dubbo.common.extensionloader.ExtensionLoader_Adaptive_UseJdkCompiler_Test" name="test_getAdaptiveExtension_ExceptionWhenNoUrlAttribute" time="0"/>
+  <testcase classname="com.alibaba.dubbo.common.extensionloader.ExtensionLoader_Adaptive_UseJdkCompiler_Test" name="test_urlHolder_getAdaptiveExtension_ExceptionWhenNameNotProvided" time="0"/>
+  <testcase classname="com.alibaba.dubbo.common.extensionloader.ExtensionLoader_Adaptive_UseJdkCompiler_Test" name="test_getAdaptiveExtension_inject" time="0"/>
+  <testcase classname="com.alibaba.dubbo.common.extensionloader.ExtensionLoader_Adaptive_UseJdkCompiler_Test" name="test_getAdaptiveExtension_defaultAdaptiveKey" time="0.001"/>
+  <testcase classname="com.alibaba.dubbo.common.extensionloader.ExtensionLoader_Adaptive_UseJdkCompiler_Test" name="test_urlHolder_getAdaptiveExtension" time="0"/>
+  <testcase classname="com.alibaba.dubbo.common.extensionloader.ExtensionLoader_Adaptive_UseJdkCompiler_Test" name="test_urlHolder_getAdaptiveExtension_ExceptionWhenNotAdativeMethod" time="0"/>
+  <testcase classname="com.alibaba.dubbo.common.extensionloader.ExtensionLoader_Adaptive_UseJdkCompiler_Test" name="test_urlHolder_getAdaptiveExtension_UrlNpe" time="0"/>
+</testsuite>
