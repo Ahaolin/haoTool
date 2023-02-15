@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.alibaba.dubbo.common.extensionloader.ExtensionLoader_Adaptive_UseJdkCompiler_Test
--------------------------------------------------------------------------------
-Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec
