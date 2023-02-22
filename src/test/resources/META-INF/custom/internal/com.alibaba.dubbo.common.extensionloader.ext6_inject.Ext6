@@ -1,2 +1,4 @@
 impl1=com.alibaba.dubbo.common.extensionloader.ext6_inject.impl.Ext6Impl1
 impl2=com.alibaba.dubbo.common.extensionloader.ext6_inject.impl.Ext6Impl2
+impl3=com.alibaba.dubbo.common.extensionloader.ext6_inject.impl.Ext6Impl3
+impl4=com.alibaba.dubbo.common.extensionloader.ext6_inject.impl.Ext6Impl4

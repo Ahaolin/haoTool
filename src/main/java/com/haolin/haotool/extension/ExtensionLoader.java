@@ -21,6 +21,7 @@ import cn.hutool.core.collection.ConcurrentHashSet;
 import com.haolin.dubbo.common.constants.CommonConstants;
 import com.haolin.dubbo.common.util.ConfigUtils;
 import com.haolin.dubbo.common.util.Holder;
+import com.haolin.dubbo.common.util.ReflectUtils;
 import com.haolin.dubbo.common.util.StringUtils;
 import com.haolin.haotool.extension.compiler.Compiler;
 import com.haolin.haotool.extension.support.ActivateComparator;
@@ -742,24 +743,41 @@ public class ExtensionLoader<T> {
         try {
             if (objectFactory != null) {
                 for (Method method : instance.getClass().getMethods()) {
-                    if (method.getName().startsWith("set")
-                            && method.getParameterTypes().length == 1
-                            && Modifier.isPublic(method.getModifiers())) { // setting && public 方法
-                        // 获得属性的类型
-                        Class<?> pt = method.getParameterTypes()[0];
-                        try {
-                            // 获得属性
-                            String property = method.getName().length() > 3 ? method.getName().substring(3, 4).toLowerCase() + method.getName().substring(4) : "";
-                            // 获得属性值
-                            Object object = objectFactory.getExtension(pt, property);
-                            // 设置属性值
-                            if (object != null) {
-                                method.invoke(instance, object);
-                            }
-                        } catch (Exception e) {
-                            logger.error("fail to inject via method " + method.getName()
-                                    + " of interface " + type.getName() + ": " + e.getMessage(), e);
+                    if (!isSetter(method)) { // setting && public 方法
+                        continue;
+                    }
+                    /**
+                     * Check {@link DisableInject} to see if we need auto injection for this property
+                     */
+                    if (method.isAnnotationPresent(DisableInject.class)) {
+                        continue;
+                    }
+                    // 获得属性的类型
+                    Class<?> pt = method.getParameterTypes()[0];
+                    if (ReflectUtils.isPrimitives(pt)) {
+                        continue;
+                    }
+                    try {
+                        // 获得属性
+                        String property = getSetterProperty(method);
+                        /**
+                         * {@link InjectPropName} inject property name ,if property name need custom.
+                         */
+                        if (method.isAnnotationPresent(InjectPropName.class)){
+                            InjectPropName injectPropName = method.getAnnotation(InjectPropName.class);
+                            String newProperty = injectPropName.propName();
+                            if (StringUtils.isBlank(newProperty)) property = newProperty;
                         }
+
+                        // 获得属性值
+                        Object object = objectFactory.getExtension(pt, property);
+                        // 设置属性值
+                        if (object != null) {
+                            method.invoke(instance, object);
+                        }
+                    } catch (Exception e) {
+                        logger.error("fail to inject via method " + method.getName()
+                                + " of interface " + type.getName() + ": " + e.getMessage(), e);
                     }
                 }
             }
@@ -767,6 +785,32 @@ public class ExtensionLoader<T> {
             logger.error(e.getMessage(), e);
         }
         return instance;
+    }
+
+
+    /**
+     * return true if and only if:
+     * <p>
+     * 1, public
+     * <p>
+     * 2, name starts with "set"
+     * <p>
+     * 3, only has one parameter
+     */
+    private boolean isSetter(Method method) {
+        return method.getName().startsWith("set")
+                && method.getParameterTypes().length == 1
+                && Modifier.isPublic(method.getModifiers());
+    }
+
+
+    /**
+     * get properties name for setter, for instance: setVersion, return "version"
+     * <p>
+     * return "", if setter name with length less than 3
+     */
+    private String getSetterProperty(Method method) {
+        return method.getName().length() > 3 ? method.getName().substring(3, 4).toLowerCase() + method.getName().substring(4) : "";
     }
 
     private Class<?> getExtensionClass(String name) {
@@ -1228,7 +1272,7 @@ public class ExtensionLoader<T> {
 
         // 调试，打印生成的代码
         if (logger.isDebugEnabled()) {
-            logger.debug("====================="+ type.getName() + "==================\n " + codeBuidler.toString() + "\n =================================================================================");
+            logger.debug("===================== dynamic Generate:["+ type.getName() + "]==================\n " + codeBuidler + "\n =================================================================================");
         }
         return codeBuidler.toString();
     }

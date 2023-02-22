@@ -1,7 +1,5 @@
 package com.haolin.haotool.bytecode;
 
-import com.haolin.haotool.WrapperCheck;
-import com.haolin.haotool.bytecode.Form;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

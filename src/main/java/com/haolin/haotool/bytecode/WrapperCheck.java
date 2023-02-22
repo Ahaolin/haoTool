@@ -1,10 +1,8 @@
 
-package com.haolin.haotool;
+package com.haolin.haotool.bytecode;
 
 import cn.hutool.core.util.StrUtil;
 import com.haolin.dubbo.common.constants.NoSuchPropertyException;
-import com.haolin.haotool.bytecode.ClassGenerator;
-import com.haolin.haotool.bytecode.DubboLoaderClassPath;
 import com.haolin.dubbo.common.util.ClassUtils;
 import com.haolin.dubbo.common.util.ReflectUtils;
 import javassist.ClassPool;

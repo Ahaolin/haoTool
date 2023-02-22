@@ -316,7 +316,20 @@ public class ExtensionLoader_Adaptive_Test {
 
         url = url.addParameters("simple.ext", "impl2");
         assertEquals("Ext6Impl1-echo-Ext1Impl2-echo", ext.echo(url, "ha")); // 注入 SimpleExt2实现
+    }
 
+    @Test
+    public void test_getAdaptiveExtension_non_inject() throws Exception {
+        Ext6 ext = ExtensionLoader.getExtensionLoader(Ext6.class).getAdaptiveExtension();
+
+        URL url = new URL("p1", "1.2.3.4", 1010, "path1");
+        url = url.addParameters("ext6", "impl3");
+
+        // 测试disableExt
+        assertEquals("Ext6Impl1-echo-ext1 == null", ext.echo(url,"ha")); // impl3中的simpleExt未能成功注入
+        // 测试 inject instance 名称修改
+        url = url.addParameters("ext6", "impl4");
+        assertEquals("Ext6Impl4-echo-simpleExt != null", ext.echo(url,"ha"));
     }
 
     @Test
