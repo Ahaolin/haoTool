@@ -568,4 +568,14 @@ public abstract class WrapperCheck {
      * @throws InvocationTargetException
      */
     abstract public void clearParam(Object instance) throws NoSuchMethodException, InvocationTargetException;
+
+    public void clearParamNonThrows(Object instance, Logger logger) {
+        try {
+            clearParam(instance);
+        } catch (NoSuchMethodException | InvocationTargetException e) {
+            if (logger != null) {
+                LOGGER.error("=== [{}] clean Param error!", instance.getClass().getSimpleName());
+            }
+        }
+    }
 }

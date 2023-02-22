@@ -14,11 +14,12 @@ class WrapperCheckTest {
         form.setData("");
 
         WrapperCheck wrapper = WrapperCheck.getWrapper(Form.class);
-        try {
-            wrapper.clearParam(form);
-        } catch (NoSuchMethodException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
+        wrapper.clearParamNonThrows(form, null);
+//        try {
+//            wrapper.clearParam(form);
+//        } catch (NoSuchMethodException | InvocationTargetException e) {
+//            e.printStackTrace();
+//        }
         Assertions.assertNull(form.getData());
     }
 
