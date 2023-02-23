@@ -57,7 +57,7 @@ public class TreeUtilBackUp {
      * @param clazz    返回数据的类型
      * @param parser   collect中的数据转换为Tree<M>节点的实现
      * @param <M>      TreeNode的id类型
-     * @param <N>      返回的集合  需要继承{@link ITreeVO}。 Tree转换为 N的逻辑在 {@link ITreeVO#covertData(Tree)}
+     * @param <N>      返回的集合  需要继承{@link ITreeVO}。 Tree转换为 N的逻辑在 {@link ITreeVO#restoreData(Tree)}
      *                 <p>
      *                 返回树化结构数据
      */
@@ -80,7 +80,7 @@ public class TreeUtilBackUp {
      * @param parentId 首个父id
      * @param clazz    返回数据的类型
      * @param <M>      TreeNode的id类型
-     * @param <N>      返回的集合  需要继承{@link ITreeVO}。 Tree转换为 N的逻辑在 {@link ITreeVO#covertData(Tree)}
+     * @param <N>      返回的集合  需要继承{@link ITreeVO}。 Tree转换为 N的逻辑在 {@link ITreeVO#restoreData(Tree)}
      *                 <p>
      *                 返回树化结构数据
      */
@@ -161,7 +161,7 @@ public class TreeUtilBackUp {
     private static <M, N extends ITreeVO<N, M>> void buildChildren(Collection<Tree<M>> build, List<N> results, Class<N> clazz) {
         build.forEach(v -> {
             final N result = getResult(clazz, v);
-            result.covertData(v);
+            result.restoreData(v);
             final List<Tree<M>> children = v.getChildren();
             if (CollectionUtil.isNotEmpty(children)) {
                 result.setChildren(new ArrayList<>());

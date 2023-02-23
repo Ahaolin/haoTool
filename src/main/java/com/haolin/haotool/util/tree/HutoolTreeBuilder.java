@@ -22,7 +22,7 @@ public class HutoolTreeBuilder implements TreeBuilder {
      * @param clazz    返回数据的类型
      * @param parser   collect中的数据转换为Tree<M>节点的实现  {@link TreeBuilder#DEFAULT_STRING_NODE_PARSER}
      * @param <M>      TreeNode的id类型
-     * @param <N>      返回的集合  需要继承{@link ITreeVO}。 Tree转换为 N的逻辑在 {@link ITreeVO#covertData(Tree)}
+     * @param <N>      返回的集合  需要继承{@link ITreeVO}。 Tree转换为 N的逻辑在 {@link ITreeVO#restoreData(Tree)}
      *                 <p>
      *                 返回树化结构数据
      */

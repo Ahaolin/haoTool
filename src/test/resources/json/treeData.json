@@ -1,0 +1,33 @@
+[
+  {
+    "id": 0,
+    "level": 1,
+    "name": "根节点",
+    "orderNum": 1,
+    "orgFlag": true
+  },
+  {
+    "id": 10,
+    "level": 2,
+    "name": "A",
+    "orderNum": 10,
+    "orgFlag": true,
+    "parentId": 0
+  },
+  {
+    "id": 11,
+    "level": 2,
+    "name": "B",
+    "orderNum": 12,
+    "orgFlag": false,
+    "parentId": 0
+  },
+  {
+    "id": 12,
+    "level": 2,
+    "name": "C",
+    "orderNum": 5,
+    "orgFlag": true,
+    "parentId": 0
+  }
+]

@@ -8,10 +8,14 @@ import java.util.function.Consumer;
 public interface ITreeVO<T, K> {
 
     void setChildren(List<T> data);
-
     List<T> getChildren();
 
-    void covertData(Tree<K> treeNode);
+ /***************************************************/
+
+    /**
+     * 树节点 还原为 instance中的数据
+     */
+    void restoreData(Tree<K> treeNode);
 
     /**
      * 实例K 转换成 TreeNode<K> 对象
