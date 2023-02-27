@@ -32,12 +32,14 @@ import java.util.stream.Collectors;
 public class TreeBuilderTest {
     @Test
     public void testJson(){
-        SysOrgDeptTreeDTO root = new SysOrgDeptTreeDTO(0L, null, "根节点", null, 1, true, 1);
-        SysOrgDeptTreeDTO c1 = new SysOrgDeptTreeDTO(10L, 0L, "A", null, 2, true, 10);
-        SysOrgDeptTreeDTO c2 = new SysOrgDeptTreeDTO(11L, 0L, "B", null, 2, false, 12);
-        SysOrgDeptTreeDTO c3 = new SysOrgDeptTreeDTO(12L, 0L, "C", null, 2, true, 5);
+        SysOrgDeptTreeDTO root = new SysOrgDeptTreeDTO(1L, null, "根节点", null, 1, true, 1);
+        SysOrgDeptTreeDTO c1 = new SysOrgDeptTreeDTO(10L, 1L, "A", null, 2, true, 10);
+        SysOrgDeptTreeDTO c2 = new SysOrgDeptTreeDTO(11L, 1L, "B", null, 2, false, 12);
+        SysOrgDeptTreeDTO c3 = new SysOrgDeptTreeDTO(12L, 1L, "C", null, 2, true, 5);
+        // 无父节点
+        SysOrgDeptTreeDTO data = new SysOrgDeptTreeDTO(999L, 9999L, "未知子节点", null, 4, true, 1);
 
-        List<SysOrgDeptTreeDTO> treeDTOS = Arrays.asList(root, c1, c2, c3);
+        List<SysOrgDeptTreeDTO> treeDTOS = Arrays.asList(root, c1, c2, c3, data);
         System.out.println(JSON.toJSONString(treeDTOS));
     }
 
@@ -50,7 +52,7 @@ public class TreeBuilderTest {
         List<SysOrgDeptTreeDTO> treeDto = TreeUtilBackUp.covertTree(treeNodes, "0", SysOrgDeptTreeDTO.class,
                 TreeUtilBackUp.wrapperNonDataNodeParser(TreeUtilBackUp.DEFAULT_STRING_NODE_PARSER));
 
-        Assertions.assertTrue(treeDto != null);
+        Assertions.assertNotNull(treeDto);
     }
 
     @Test
@@ -61,7 +63,8 @@ public class TreeBuilderTest {
         URL url = new URL(null, null, 80);
         List<SysOrgDeptTreeDTO> treeDto = ExtensionLoader.getExtensionLoader(TreeBuilder.class).getAdaptiveExtension()
                 .covertTree(url, treeNodes, "0", SysOrgDeptTreeDTO.class, TreeBuilder.DEFAULT_STRING_NODE_PARSER);
-        Assertions.assertTrue(treeDto != null);
+        Assertions.assertNotNull(treeDto);
+        Assertions.assertEquals(1, treeDto.size());
 
 
         // 测试 nonParentNode
@@ -69,7 +72,10 @@ public class TreeBuilderTest {
         url.addParameter("tree.enabled", true); // 测试添加额外参数
         treeDto = ExtensionLoader.getExtensionLoader(TreeBuilder.class).getAdaptiveExtension()
                 .covertTree(url, treeNodes, "0", SysOrgDeptTreeDTO.class, TreeBuilder.DEFAULT_STRING_NODE_PARSER);
-        Assertions.assertTrue(treeDto != null);
+        Assertions.assertNotNull(treeDto);
+        Assertions.assertEquals(2, treeDto.size());
+        Assertions.assertEquals("根节点", treeDto.get(0).getName());
+        Assertions.assertEquals("未知子节点", treeDto.get(1).getName());
     }
 
 
@@ -132,7 +138,7 @@ public class TreeBuilderTest {
 @AllArgsConstructor
 @NoArgsConstructor
 class SysOrgDeptTreeDTO implements ITreeVO<SysOrgDeptTreeDTO,String>,Comparable<SysOrgDeptTreeDTO>, Serializable {
-    private Long id;
+    private Long id; // id 不可为0
     private Long parentId;
     private String name;
 

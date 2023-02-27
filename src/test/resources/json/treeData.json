@@ -1,6 +1,6 @@
 [
   {
-    "id": 0,
+    "id": 1,
     "level": 1,
     "name": "根节点",
     "orderNum": 1,
@@ -12,7 +12,7 @@
     "name": "A",
     "orderNum": 10,
     "orgFlag": true,
-    "parentId": 0
+    "parentId": 1
   },
   {
     "id": 11,
@@ -20,7 +20,7 @@
     "name": "B",
     "orderNum": 12,
     "orgFlag": false,
-    "parentId": 0
+    "parentId": 1
   },
   {
     "id": 12,
@@ -28,6 +28,14 @@
     "name": "C",
     "orderNum": 5,
     "orgFlag": true,
-    "parentId": 0
+    "parentId": 1
+  },
+  {
+    "id": 999,
+    "level": 4,
+    "name": "未知子节点",
+    "orderNum": 1,
+    "orgFlag": true,
+    "parentId": 9999
   }
 ]
