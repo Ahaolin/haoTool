@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.haolin.dubbo.common.util.Holder;
+import com.haolin.dubbo.common.util.holder.Holder;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

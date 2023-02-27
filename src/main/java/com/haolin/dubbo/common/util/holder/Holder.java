@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.haolin.dubbo.common.util;
+package com.haolin.dubbo.common.util.holder;
 
 /**
  * Helper Class for hold a value.

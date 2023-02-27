@@ -20,7 +20,7 @@ package com.haolin.haotool.extension;
 import cn.hutool.core.collection.ConcurrentHashSet;
 import com.haolin.dubbo.common.constants.CommonConstants;
 import com.haolin.dubbo.common.util.ConfigUtils;
-import com.haolin.dubbo.common.util.Holder;
+import com.haolin.dubbo.common.util.holder.Holder;
 import com.haolin.dubbo.common.util.ReflectUtils;
 import com.haolin.dubbo.common.util.StringUtils;
 import com.haolin.haotool.extension.compiler.Compiler;
@@ -1059,7 +1059,7 @@ public class ExtensionLoader<T> {
      *
      * @return 代码字符串
      */
-    // cusNote 自动生成代码
+    // cusIgnore 自适应生成代码逻辑处
     private String createAdaptiveExtensionClassCode() {
         StringBuilder codeBuidler = new StringBuilder();
         // 遍历方法数组，判断有 @Adaptive 注解
