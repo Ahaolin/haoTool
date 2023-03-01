@@ -2,9 +2,11 @@ package com.haolin.haotool.util.tree.support;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.tree.Tree;
+import cn.hutool.core.lang.tree.TreeNodeConfig;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.haolin.dubbo.common.util.holder.Holder;
+import com.haolin.haotool.extension.URL;
 import com.haolin.haotool.util.tree.ITreeVO;
 
 import java.lang.reflect.Constructor;
@@ -26,6 +28,25 @@ public class TreeUtil {
             results.add(result);
         });
     }
+
+    /**
+     * 定制化字段设置
+     */
+    public static TreeNodeConfig customTreeNodeConfig(URL url) {
+        TreeNodeConfig nodeConfig = TreeNodeConfig.DEFAULT_CONFIG;
+        if (url.getParameter("tree.enabled", true)) {
+            String idKey = url.getParameter("tree.idKey", "id");
+            String parentIdKey = url.getParameter("tree.parentIdKey", "parentId");
+            String weightKey = url.getParameter("tree.weightKey", "weight");
+            String nameKey = url.getParameter("tree.nameKey", "name");
+            String childrenKey = url.getParameter("tree.childrenKey", "children");
+
+            nodeConfig = new TreeNodeConfig().setIdKey(idKey).setParentIdKey(parentIdKey).setWeightKey(weightKey)
+                    .setNameKey(nameKey).setChildrenKey(childrenKey);
+        }
+        return nodeConfig;
+    }
+
 
     private final static  Map<Class<?>,Holder<Constructor<?>>> CACHE_CONSTRUCTOR = new ConcurrentHashMap<>();
 

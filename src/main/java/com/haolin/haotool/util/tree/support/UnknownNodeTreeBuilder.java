@@ -18,7 +18,7 @@ import java.util.*;
  * 注意： 无父数据  默认为 最大节点
  *  只要是{@param collect} 中的数据,全部会添加到树化节点中
  *
- *  注意有些额外的配置:{@link UnknownNodeTreeBuilder#customTreeNodeConfig(com.haolin.haotool.extension.URL)}
+ *  注意有些额外的配置:{@link TreeUtil#customTreeNodeConfig(com.haolin.haotool.extension.URL)}
  * @author Ahaolin
  */
 public class UnknownNodeTreeBuilder implements TreeBuilder {
@@ -41,7 +41,7 @@ public class UnknownNodeTreeBuilder implements TreeBuilder {
         if (!(parser instanceof NonDataNodeParser)) {
             parser = new NonDataNodeParser<>(parser);
         }
-        TreeNodeConfig nodeConfig = customTreeNodeConfig(url);
+        TreeNodeConfig nodeConfig = TreeUtil.customTreeNodeConfig(url);
         for (TreeNode<M> obj : collect) {
             Tree<M> treeNode = new Tree<>(nodeConfig);
             parser.parse(obj, treeNode);
@@ -50,32 +50,12 @@ public class UnknownNodeTreeBuilder implements TreeBuilder {
     }
 
     /**
-     * 定制化字段设置
-     */
-    private TreeNodeConfig customTreeNodeConfig(URL url) {
-        TreeNodeConfig nodeConfig = TreeNodeConfig.DEFAULT_CONFIG;
-        if (url.getParameter("tree.enabled", true)) {
-            String idKey = url.getParameter("tree.idKey", "id");
-            String parentIdKey = url.getParameter("tree.parentIdKey", "parentId");
-            String weightKey = url.getParameter("tree.weightKey", "weight");
-            String nameKey = url.getParameter("tree.nameKey", "name");
-            String childrenKey = url.getParameter("tree.childrenKey", "children");
-
-            nodeConfig = new TreeNodeConfig().setIdKey(idKey).setParentIdKey(parentIdKey).setWeightKey(weightKey)
-                    .setNameKey(nameKey).setChildrenKey(childrenKey);
-        }
-        return nodeConfig;
-    }
-
-
-    /**
      * 递归的转化 为 clazz类型的集合
      * @param curParentId 指定parrentId
      * @param clazz 需要转换的类型
      * @param nonParentData  树的全量数据  key为id
      */
-    private static <N extends ITreeVO<N, M>, M> List<N> covertData(M curParentId, Class<N> clazz,
-                                                                   Map<M, Tree<M>> nonParentData) {
+    private static <N extends ITreeVO<N, M>, M> List<N> covertData(M curParentId, Class<N> clazz, Map<M, Tree<M>> nonParentData) {
         List<N> results = new ArrayList<>();
         if (CollectionUtil.isEmpty(nonParentData)) return Collections.emptyList();
         // rebuildTree

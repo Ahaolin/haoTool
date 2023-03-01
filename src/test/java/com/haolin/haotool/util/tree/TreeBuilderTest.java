@@ -58,6 +58,9 @@ public class TreeBuilderTest {
         Assertions.assertNotNull(treeDto);
     }
 
+    /**
+     * 测试 树是否满足 json文件定义的数据
+     */
     @Test
     @SuppressWarnings("all")
     public void testBuildExt() {
@@ -65,15 +68,16 @@ public class TreeBuilderTest {
 
         // 测试hutool
         URL url = new URL(null, null, 80);
+        // ***测试添加额外参数（使得 Tree对象中key值改变）*********************
+        url = url.addParameter("tree.enabled", true).addParameter("tree.nameKey","orgName");
+        // **************************************************************
         List<SysOrgDeptTreeDTO> treeDto = ExtensionLoader.getExtensionLoader(TreeBuilder.class).getAdaptiveExtension()
                 .covertTree(url, treeNodes, "0", SysOrgDeptTreeDTO.class, TreeBuilder.DEFAULT_STRING_NODE_PARSER);
         Assertions.assertNotNull(treeDto);
         Assertions.assertEquals(1, treeDto.size());
 
-
         // 测试 nonParentNode
-        url = new URL("unknown", null, 80);
-        url = url.addParameter("tree.enabled", true); // 测试添加额外参数
+        url = url.setProtocol("unknown");
         System.out.println(url.toFullString());
 
         treeDto = ExtensionLoader.getExtensionLoader(TreeBuilder.class).getAdaptiveExtension()

@@ -3,6 +3,7 @@ package com.haolin.haotool.util.tree.support;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.tree.Tree;
+import cn.hutool.core.lang.tree.TreeNodeConfig;
 import cn.hutool.core.lang.tree.parser.NodeParser;
 import com.haolin.haotool.extension.URL;
 import com.haolin.haotool.util.tree.ITreeVO;
@@ -35,7 +36,8 @@ public class HutoolTreeBuilder implements TreeBuilder {
     public <M, N extends ITreeVO<N, M>> List<N> covertTree(URL url, List<TreeNode<M>> collect, M parentId,
                                                            Class<N> clazz, NodeParser<TreeNode<M>, M> parser) {
         if (CollUtil.isEmpty(collect)) return Collections.emptyList();
-        final List<Tree<M>> build = cn.hutool.core.lang.tree.TreeUtil.build(collect, parentId, parser);
+        TreeNodeConfig nodeConfig = TreeUtil.customTreeNodeConfig(url);
+        final List<Tree<M>> build = cn.hutool.core.lang.tree.TreeUtil.build(collect, parentId, nodeConfig, parser);
         return covertData(build, clazz);
     }
 
