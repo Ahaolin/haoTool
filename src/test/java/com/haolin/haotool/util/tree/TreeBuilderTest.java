@@ -8,6 +8,8 @@ import cn.hutool.core.lang.tree.Tree;
 import com.alibaba.fastjson.JSON;
 import com.haolin.haotool.extension.ExtensionLoader;
 import com.haolin.haotool.extension.URL;
+import com.haolin.haotool.util.tree.support.TreeUtil;
+import com.haolin.haotool.util.tree.support.TreeUtilBackUp;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,7 +33,7 @@ import java.util.stream.Collectors;
 
 public class TreeBuilderTest {
     @Test
-    public void testJson(){
+    public void testJson() {
         SysOrgDeptTreeDTO root = new SysOrgDeptTreeDTO(1L, null, "根节点", null, 1, true, 1);
         SysOrgDeptTreeDTO c1 = new SysOrgDeptTreeDTO(10L, 1L, "A", null, 2, true, 10);
         SysOrgDeptTreeDTO c2 = new SysOrgDeptTreeDTO(11L, 1L, "B", null, 2, false, 12);
@@ -45,6 +47,7 @@ public class TreeBuilderTest {
 
 
     @Test
+    @SuppressWarnings("all")
     public void testBuild(){
         List<TreeNode<String>> treeNodes = getTreeNodes();
         if (treeNodes == null) return /*Collections.emptyList()*/;
@@ -56,7 +59,8 @@ public class TreeBuilderTest {
     }
 
     @Test
-    public void testBuildExt(){
+    @SuppressWarnings("all")
+    public void testBuildExt() {
         List<TreeNode<String>> treeNodes = getTreeNodes();
 
         // 测试hutool
@@ -69,7 +73,9 @@ public class TreeBuilderTest {
 
         // 测试 nonParentNode
         url = new URL("unknown", null, 80);
-        url.addParameter("tree.enabled", true); // 测试添加额外参数
+        url = url.addParameter("tree.enabled", true); // 测试添加额外参数
+        System.out.println(url.toFullString());
+
         treeDto = ExtensionLoader.getExtensionLoader(TreeBuilder.class).getAdaptiveExtension()
                 .covertTree(url, treeNodes, "0", SysOrgDeptTreeDTO.class, TreeBuilder.DEFAULT_STRING_NODE_PARSER);
         Assertions.assertNotNull(treeDto);
@@ -80,6 +86,7 @@ public class TreeBuilderTest {
 
 
 
+    @SuppressWarnings("all")
     private List<TreeNode<String>> getTreeNodes() {
         // 从本地的文件读取
         InputStream stream = this.getClass().getClassLoader().getResourceAsStream("json/treeData.json");
@@ -162,6 +169,7 @@ class SysOrgDeptTreeDTO implements ITreeVO<SysOrgDeptTreeDTO,String>,Comparable<
     }
 
     @Override
+    @SuppressWarnings("all")
     public TreeNode<String> covertTreeNode() {
         return new TreeNode<>(
                 String.valueOf(getId()),

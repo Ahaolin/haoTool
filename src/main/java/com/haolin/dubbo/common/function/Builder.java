@@ -1,4 +1,4 @@
-package com.haolin.haotool.util;
+package com.haolin.dubbo.common.function;
 
 import java.util.ArrayList;
 import java.util.List;

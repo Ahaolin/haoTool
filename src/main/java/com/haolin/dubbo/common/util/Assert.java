@@ -2,7 +2,7 @@ package com.haolin.dubbo.common.util;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.NumberUtil;
-import com.haolin.dubbo.common.constants.LocaleBizServiceException;
+import com.haolin.dubbo.common.exce.NationBizServiceException;
 
 import java.util.Collection;
 import java.util.function.Supplier;
@@ -99,9 +99,9 @@ public class Assert {
 
     private static void buildException(String message, Object[] args) {
         if (args == null) {
-            throw new LocaleBizServiceException(message);
+            throw new NationBizServiceException(message);
         }
-        throw new LocaleBizServiceException(message, args);
+        throw new NationBizServiceException(message, args);
     }
 
 //    public class LocaleBizServiceException extends BizServiceException {

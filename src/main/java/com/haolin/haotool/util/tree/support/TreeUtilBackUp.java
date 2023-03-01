@@ -1,4 +1,4 @@
-package com.haolin.haotool.util.tree;
+package com.haolin.haotool.util.tree.support;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.Dict;
@@ -7,6 +7,9 @@ import cn.hutool.core.lang.tree.TreeNodeConfig;
 import cn.hutool.core.lang.tree.parser.NodeParser;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.haolin.haotool.util.tree.ITreeVO;
+import com.haolin.haotool.util.tree.TreeBuilder;
+import com.haolin.haotool.util.tree.TreeNode;
 
 import java.util.*;
 

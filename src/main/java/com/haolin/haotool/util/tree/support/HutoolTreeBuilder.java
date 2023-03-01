@@ -1,10 +1,15 @@
-package com.haolin.haotool.util.tree;
+package com.haolin.haotool.util.tree.support;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.lang.tree.parser.NodeParser;
 import com.haolin.haotool.extension.URL;
+import com.haolin.haotool.util.tree.ITreeVO;
+import com.haolin.haotool.util.tree.TreeBuilder;
+import com.haolin.haotool.util.tree.TreeNode;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,6 +36,18 @@ public class HutoolTreeBuilder implements TreeBuilder {
                                                            Class<N> clazz, NodeParser<TreeNode<M>, M> parser) {
         if (CollUtil.isEmpty(collect)) return Collections.emptyList();
         final List<Tree<M>> build = cn.hutool.core.lang.tree.TreeUtil.build(collect, parentId, parser);
-        return TreeUtil.covertData(build, clazz);
+        return covertData(build, clazz);
+    }
+
+    /**
+     * 递归的转化 为 clazz类型的集合
+     * @param build 需要转换前的原始数据 。 如果build的 父id有，但是找不到 父对象，移除
+     * @param clazz 需要转换的类型
+     */
+    private <M, N extends ITreeVO<N, M>> List<N> covertData(List<Tree<M>> build, Class<N> clazz) {
+        if (CollectionUtil.isEmpty(build)) return Collections.emptyList();
+        List<N> results = new ArrayList<>();
+        TreeUtil.buildChildren(build, results, clazz);
+        return results;
     }
 }

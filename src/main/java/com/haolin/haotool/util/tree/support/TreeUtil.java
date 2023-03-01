@@ -1,10 +1,11 @@
-package com.haolin.haotool.util.tree;
+package com.haolin.haotool.util.tree.support;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.haolin.dubbo.common.util.holder.Holder;
+import com.haolin.haotool.util.tree.ITreeVO;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -12,18 +13,6 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class TreeUtil {
-
-    /**
-     * 递归的转化 为 clazz类型的集合
-     * @param build 需要转换前的原始数据 。 如果build的 父id有，但是找不到 父对象，移除
-     * @param clazz 需要转换的类型
-     */
-    public static <M, N extends ITreeVO<N, M>> List<N> covertData(List<Tree<M>> build, Class<N> clazz) {
-        if (CollectionUtil.isEmpty(build)) return Collections.emptyList();
-        List<N> results = new ArrayList<>();
-        buildChildren(build, results, clazz);
-        return results;
-    }
 
     public static <M, N extends ITreeVO<N, M>> void buildChildren(Collection<Tree<M>> build, List<N> results, Class<N> clazz) {
         build.forEach(v -> {

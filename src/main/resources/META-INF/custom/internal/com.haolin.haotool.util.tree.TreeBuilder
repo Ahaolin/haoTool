@@ -1,2 +1,2 @@
-hutool=com.haolin.haotool.util.tree.HutoolTreeBuilder
-unknown=com.haolin.haotool.util.tree.UnknownNodeTreeBuilder
+hutool=com.haolin.haotool.util.tree.support.HutoolTreeBuilder
+unknown=com.haolin.haotool.util.tree.support.UnknownNodeTreeBuilder

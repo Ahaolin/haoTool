@@ -6,7 +6,7 @@
 
     <groupId>com.ahaolin</groupId>
     <artifactId>haoTool</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
     <name>haoTool</name>
 
     <properties>
@@ -101,7 +101,6 @@
                 <version>2.7</version>
                 <configuration>
                     <source>1.8</source>
-                    <target>1.8</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
                 <executions>
@@ -123,9 +122,9 @@
                 <version>2.1.2</version>
                 <configuration>
                     <attach>true</attach>
-                    <source>1.8</source>
+                  <!--  <source>1.8</source>
                     <target>1.8</target>
-                    <encoding>UTF-8</encoding>
+                    <encoding>UTF-8</encoding>-->
                 </configuration>
                 <executions>
                     <execution>
