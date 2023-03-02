@@ -6,8 +6,8 @@
 
 ```xml
 <dependency>
-           <groupId>com.ahaolin</groupId>
-          <artifactId>haoTool</artifactId>
+         <groupId>com.ahaolin</groupId>
+         <artifactId>haoTool</artifactId>
 	<version>1.1.0</version>
  </dependency>
 ```
@@ -19,10 +19,15 @@
 ![image-20230215110705022](https://ahaolin-public-img.oss-cn-hangzhou.aliyuncs.com/img/202302151208872.png)
 
 ```java
+// 下面路径的SPI文件自动扫描到
+// META-INF/services/
+// META-INF/custom/
+// META-INF/custom/internal/
+
 // META-INF/custom/internal/com.haolin.haotool.extension.ExtensionFactory
 spring=com.haolin.haotool.extension.factory.SpringExtensionFactory
     
-// META-INF/custom/internal/com.haolin.haotool.extension.ExtensionFactory
+// META-INF/custom/internal/com.example.demo.service.impl.DemoService
 demo=com.example.demo.service.impl.DemoServiceImpl 
     
 // springboot 启动 强烈建议添加如下代码
