@@ -21,7 +21,7 @@ public interface TreeBuilder {
      * @param clazz    返回数据的类型
      * @param parser   collect中的数据转换为Tree<M>节点的实现  {@link TreeBuilder#DEFAULT_STRING_NODE_PARSER}
      * @param <M>      TreeNode的id类型
-     * @param <N>      返回的集合  需要继承{@link ITreeVO}。 Tree转换为 N的逻辑在 {@link ITreeVO#restoreData(Tree, cn.hutool.core.lang.tree.TreeNodeConfig)}
+     * @param <N>      返回的集合  需要继承{@link ITreeVO}。 Tree转换为 N的逻辑在 {@link ITreeVO#restoreData(Tree)}
      *                 <p>
      *                 返回树化结构数据
      */
@@ -32,14 +32,14 @@ public interface TreeBuilder {
     /**
      * 默认类型的数据
      */
-    NodeParser<TreeNode<String>, String> DEFAULT_STRING_NODE_PARSER = (obj, treeNode) -> {
-        treeNode.setId(obj.getId());
-        treeNode.setParentId(obj.getParentId());
-        treeNode.setWeight(obj.getWeight());
-        treeNode.setName(obj.getName());
+    NodeParser<TreeNode<String>, String> DEFAULT_STRING_NODE_PARSER = (treeNode, tree) -> {
+        tree.setId(treeNode.getId());
+        tree.setParentId(treeNode.getParentId());
+        tree.setWeight(treeNode.getWeight());
+        tree.setName(treeNode.getName());
         // 扩展
-        final Dict extra = obj.getExtra();
+        final Dict extra = treeNode.getExtra();
         if (extra != null)
-            extra.forEach(treeNode::putExtra);
+            extra.forEach(tree::putExtra);
     };
 }

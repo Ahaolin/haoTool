@@ -99,3 +99,17 @@ public String demo1(){
   ```
 
 - 实现了类似dubbo的spi机制。[Dubbo SPI 扩展实现说明 - 扩展点开发指南 ](https://www.bookstack.cn/read/dubbo-3.1-zh/c3b9049b6a0c218c.md) 【区别实现的是2.7.x版本，对比3.0有略微差异】
+
+- 完成了`树化`的工具类
+
+  ```java
+  // entity 必须实现 ITreeVO<String,entity> 接口
+  
+  URL url = new URL(null, null, 80);
+  // url = url.setProtocol("unknown"); 默认采用hutool的类
+  
+  List<SysOrgDeptTreeDTO> treeDto = ExtensionLoader.getExtensionLoader(TreeBuilder.class).getAdaptiveExtension()
+                  .covertTree(url, treeNodes, "0", SysOrgDeptTreeDTO.class, TreeBuilder.DEFAULT_STRING_NODE_PARSER);
+  ```
+
+  

@@ -34,7 +34,7 @@ public class TreeUtil {
      */
     public static TreeNodeConfig customTreeNodeConfig(URL url) {
         TreeNodeConfig nodeConfig = TreeNodeConfig.DEFAULT_CONFIG;
-        if (url.getParameter("tree.enabled", true)) {
+        if (url.getParameter("tree.enabled", false)) {
             String idKey = url.getParameter("tree.idKey", "id");
             String parentIdKey = url.getParameter("tree.parentIdKey", "parentId");
             String weightKey = url.getParameter("tree.weightKey", "weight");
