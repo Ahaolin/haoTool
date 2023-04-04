@@ -20,9 +20,9 @@
 
 ```java
 // 下面路径的SPI文件自动扫描到
-// META-INF/services/
-// META-INF/custom/
-// META-INF/custom/internal/
+// META-INF/services/         -- Java SPI 的配置目录
+// META-INF/custom/           -- 用户自定义的拓展实现
+// META-INF/custom/internal/  -- 内部提供的拓展实现
 
 // META-INF/custom/internal/com.haolin.haotool.extension.ExtensionFactory
 spring=com.haolin.haotool.extension.factory.SpringExtensionFactory

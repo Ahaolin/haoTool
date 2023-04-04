@@ -89,18 +89,14 @@ class MockTreeUtil extends SyncHolder<Class<?>, Constructor<?>> {
 
     /**
      * 本地缓存未加载到时  加载val的返回
-     *
-     * @param clazz
      */
     @Override
-    protected Constructor<?> computeVal(Class<?> clazz) throws Exception {
+    protected Constructor<?> computeVal(Class<?> clazz) {
         return ReflectUtil.getConstructor(clazz);
     }
 
     /**
      * 校验key. 错误返回true
-     *
-     * @param key
      */
     @Override
     protected boolean isKeyError(Class<?> key) {

@@ -64,6 +64,7 @@ public class TreeUtilBackUp {
      *                 <p>
      *                 返回树化结构数据
      */
+    @Deprecated
     public static <M, N extends ITreeVO<N, M>> List<N> covertTree(List<TreeNode<M>> collect, M parentId, Class<N> clazz,
                                                                   NodeParser<TreeNode<M>, M> parser) {
         if (parser instanceof NonDataNodeParser) { // 是否添加 空父集合

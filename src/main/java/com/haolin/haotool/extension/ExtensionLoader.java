@@ -185,6 +185,23 @@ public class ExtensionLoader<T> {
      * 带唯一参数为拓展接口的构造方法的实现类
      *
      * 通过 {@link #loadExtensionClasses} 加载
+     *
+     * 类似下面的代码会被加载
+     * <pre>
+     *     // 实现了 SPI接口,同时构造参数又 需要该接口的对应对象
+     *     public class ProtocolFilterWrapper implements Protocol {
+     *
+     *      private final Protocol protocol;
+     *
+     *      public ProtocolFilterWrapper(Protocol protocol) {
+     *          if (protocol == null) {
+     *              throw new IllegalArgumentException("protocol == null");
+     *          }
+     *          this.protocol = protocol;
+     *      }
+     *    }
+     * </pre>
+     *
      */
     private Set<Class<?>> cachedWrapperClasses;
 

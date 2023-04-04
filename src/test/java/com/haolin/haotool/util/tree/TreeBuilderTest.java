@@ -48,6 +48,7 @@ public class TreeBuilderTest {
 
     @Test
     @SuppressWarnings("all")
+    @Deprecated
     public void testBuild(){
         List<TreeNode<String>> treeNodes = getTreeNodes();
         if (treeNodes == null) return /*Collections.emptyList()*/;

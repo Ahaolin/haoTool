@@ -20,14 +20,14 @@ package com.haolin.haotool.extension;
 import java.lang.annotation.*;
 
 /**
- * Provide helpful information for {@link ExtensionLoader} to inject dependency extension instance.
+ * Provide helpful information for {@link ExtensionLoader} to inject dependency extension instance. <br>
  *
  * 在 {@link ExtensionLoader} 生成 Extension 的 Adaptive Instance 时，为 {@link ExtensionLoader} 提供信息。
  *
- * `@Adaptive` 可添加类或方法上。这两种方式表现不同：
+ * `@Adaptive` 可添加类或方法上。这两种方式表现不同： <br>
  *
- * 1. 当在 类 上时，直接使用被注解的类。也因此，一个拓展，只允许最多注解一个类，否则会存在多个会是冲突。
- * 2. 当在方法上时，使用 {@link ExtensionLoader#createAdaptiveExtensionClass()} 方法，创建自适应( Adaptive )拓展类。
+ * 1. 当在`类`上时,直接使用被注解的类(优先使用).也因此,一个拓展,只允许最多注解一个类,否则会存在多个会是冲突. <br>
+ * 2. 当在方法上时，使用 {@link ExtensionLoader#createAdaptiveExtensionClass()} 方法，创建自适应(Adaptive)拓展类。
  *
  * 如上逻辑，处理的入口方法为 {@link ExtensionLoader#getAdaptiveExtensionClass()}
  *
