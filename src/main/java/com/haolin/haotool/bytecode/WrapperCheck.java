@@ -33,7 +33,7 @@ public abstract class WrapperCheck {
      * key ：需要Wrapper 类。
      * value ：Proxy 对象
      */
-    private static final Map<Class<?>, WrapperCheck> WRAPPER_MAP = new ConcurrentHashMap<>(); //class wrapper map
+    private static final Map<Class<?>, WrapperCheck> WRAPPER_CACHE_MAP = new ConcurrentHashMap<>(); //class wrapper map
     private static final String[] EMPTY_STRING_ARRAY = new String[0];
     private static final String[] OBJECT_METHODS = new String[]{"getClass", "hashCode", "toString", "equals"};
     private static final WrapperCheck OBJECT_WRAPPER = new WrapperCheck() {
@@ -120,7 +120,7 @@ public abstract class WrapperCheck {
             return OBJECT_WRAPPER;
         }
         // 从缓存中获得 Wrapper 对象，如果没有 创建Wrapper对象，并添加到缓存
-        return WRAPPER_MAP.computeIfAbsent(c, WrapperCheck::makeWrapper);
+        return WRAPPER_CACHE_MAP.computeIfAbsent(c, WrapperCheck::makeWrapper);
     }
 
     private static WrapperCheck makeWrapper(Class<?> c) {
@@ -194,6 +194,10 @@ public abstract class WrapperCheck {
                     Modifier.isFinal(f.getModifiers()) || Modifier.isPublic(f.getModifiers())) {
                 continue;
             }
+            // 特定注解的不调用
+            IgnoreWrapperCheck ignoreWrapperCheck = f.getAnnotation(IgnoreWrapperCheck.class);
+            if (ignoreWrapperCheck != null) continue;
+
             df.put(fn,ft);
         }
 
@@ -585,7 +589,7 @@ public abstract class WrapperCheck {
             clearParam(instance);
         } catch (NoSuchMethodException | InvocationTargetException e) {
             if (logger != null) {
-                LOGGER.error("=== [{}] clean Param error!", instance.getClass().getSimpleName());
+                LOGGER.error("=== [{}] clean Param error!", instance.getClass().getSimpleName(), e);
             }
         }
     }

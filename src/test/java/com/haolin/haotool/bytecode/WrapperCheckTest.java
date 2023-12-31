@@ -21,6 +21,7 @@ class WrapperCheckTest {
 //            e.printStackTrace();
 //        }
         Assertions.assertNull(form.getData());
+        Assertions.assertEquals(form.getName(),"");
     }
 
     @Test

@@ -16,10 +16,13 @@
  */
 package com.haolin.haotool.bytecode;
 
+import cn.hutool.core.util.StrUtil;
 import javassist.*;
 import com.haolin.dubbo.common.util.ArrayUtils;
 import com.haolin.dubbo.common.util.ReflectUtils;
 import com.haolin.dubbo.common.util.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -77,6 +80,20 @@ public final class ClassGenerator {
     private ClassLoader mClassLoader;
     private Map<String, Method> mCopyMethods; // <method desc,method instance>
     private Map<String, Constructor<?>> mCopyConstructors; // <constructor desc,constructor instance>
+
+    /**
+     * debug时类生成的本地路径
+     */
+    private final static String DEBUG_WRITE_TO_CLASS_FILE_PATH ="class.generate.debug.file.path";
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClassGenerator.class);
+
+    /**
+     * 本地类文件生成路径，如果为空，则不生存
+     * C:\Users\10647\Downloads\
+     */
+    private String debugWriteClassPath = null;
+
     /**
      * 默认空构造方法
      */
@@ -88,6 +105,9 @@ public final class ClassGenerator {
     private ClassGenerator(ClassLoader classLoader, ClassPool pool) {
         mClassLoader = classLoader;
         mPool = pool;
+        debugWriteClassPath = System.getProperty(DEBUG_WRITE_TO_CLASS_FILE_PATH,"");
+
+        LOGGER.info("===== debug filePath = [{}]", debugWriteClassPath);
     }
 
     public static ClassGenerator newInstance() {
@@ -373,8 +393,10 @@ public final class ClassGenerator {
             }
 
             try {
-                // cusIgnore Ahaolin Javassist落地本地
-                mCtc.debugWriteFile("C:\\Users\\10647\\Downloads\\" + mCtc.getSimpleName() + ".class");
+                if (StrUtil.isNotBlank(debugWriteClassPath)) {
+                    // cusIgnore Ahaolin Javassist落地本地
+                    mCtc.debugWriteFile(debugWriteClassPath + mCtc.getSimpleName() + ".class");
+                }
                 return mPool.toClass(mCtc, neighborClass, loader, pd);
             } catch (Throwable t) {
                 if (!(t instanceof CannotCompileException)) {

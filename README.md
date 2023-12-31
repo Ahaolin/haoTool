@@ -99,6 +99,9 @@ public String demo1(){
 - 完成类似 Dubbo Wrapper的方法， 专注于前端参数重置。
 
   ```java
+  // IgnoreWrapperCheck 可忽视，目前支持 String | List
+  // String = "" ,  变为null
+  // List = 空集合 , 变为null
   WrapperCheck wrapper = WrapperCheck.getWrapper(Form.class);
   wrapper.clearParam(form);
   ```

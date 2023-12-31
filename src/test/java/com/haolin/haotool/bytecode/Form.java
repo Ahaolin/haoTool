@@ -10,6 +10,7 @@ public class Form {
         return result;
     }
 
+    @IgnoreWrapperCheck
     private String name ="";
     private String data ="";
     private List<String> types = new ArrayList<>();
