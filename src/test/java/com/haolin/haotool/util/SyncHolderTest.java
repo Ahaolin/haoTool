@@ -57,7 +57,7 @@ public class SyncHolderTest {
 
 /**
  * mock class. 另一种写法
- * @see TreeUtil#getResult(Class, Tree)
+ * @see TreeUtil#reflectGetResult(Class, Tree)
  */
 class MockTreeUtil extends SyncHolder<Class<?>, Constructor<?>> {
 

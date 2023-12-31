@@ -11,6 +11,8 @@ import com.haolin.haotool.util.tree.TreeBuilder;
 import com.haolin.haotool.util.tree.TreeNode;
 import lombok.Getter;
 import lombok.Setter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
@@ -23,6 +25,8 @@ import java.util.*;
  */
 public class UnknownNodeTreeBuilder implements TreeBuilder {
 
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UnknownNodeTreeBuilder.class);
 
     /**
      * @param collect  需要树化的数据需要先转化为该结构数据
@@ -51,26 +55,26 @@ public class UnknownNodeTreeBuilder implements TreeBuilder {
 
     /**
      * 递归的转化 为 clazz类型的集合
-     * @param curParentId 指定parrentId
-     * @param clazz 需要转换的类型
-     * @param nonParentData  树的全量数据  key为id
+     * @param curParentId  指定parrentId
+     * @param clazz        需要转换的类型
+     * @param nodeMap      树的全量数据  key为id
      */
-    private static <N extends ITreeVO<N, M>, M> List<N> covertData(M curParentId, Class<N> clazz, Map<M, Tree<M>> nonParentData) {
+    private static <N extends ITreeVO<N, M>, M> List<N> covertData(M curParentId, Class<N> clazz, Map<M, Tree<M>> nodeMap) {
         List<N> results = new ArrayList<>();
-        if (CollectionUtil.isEmpty(nonParentData)) return Collections.emptyList();
+        if (CollectionUtil.isEmpty(nodeMap)) return Collections.emptyList();
         // rebuildTree
         // nonParent可能存在一些【半成品树(缺失根节点)】 需要重新构造一遍父子关系
         TreeSet<Tree<M>> rootTrees = new TreeSet<>(Tree::compareTo); // 完整树节点的集合
 //        TreeSet<Tree<M>> nonParentTrees = new TreeSet<>(Tree::compareTo); // 【半成品树(缺失某一个父节点)】
         Set<M> removeKeys = new HashSet<>();
 
-        nonParentData.forEach((k, v) -> {
+        nodeMap.forEach((k, v) -> {
             M parentId = v.getParentId();
             Tree<M> parentTree;
             if (isRootNode(curParentId, parentId)) { //  完整树节点的集合（一般不可能）
                 rootTrees.add(v);
                 removeKeys.add(k);
-            } else if ((parentTree = nonParentData.get(parentId)) != null) { // 【半成品树(缺失某一个父节点)】
+            } else if ((parentTree = nodeMap.get(parentId)) != null) { // 【半成品树(缺失某一个父节点)】
                 List<Tree<M>> nodes = Optional.ofNullable(parentTree.getChildren()).orElse(new ArrayList<>());
                 parentTree.setChildren(nodes);
                 nodes.add(v);
@@ -82,17 +86,23 @@ public class UnknownNodeTreeBuilder implements TreeBuilder {
             }
             // 【非树无父】节点 留到最后
         });
+        int allKeyTot = nodeMap.size();
+
         /**
          * 半成品树
          */
         if (CollectionUtil.isNotEmpty(removeKeys)){
             // 判断半成品树是否需要移除  注意  添加的时候
 //            nonParentTrees.removeIf( v-> removeKeys.contains(v.getParentId()));
-            removeKeys.forEach(nonParentData::remove);
+            removeKeys.forEach(nodeMap::remove);
+        }
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("covert unknownTree! allKeyTot=[{}] unknownKeyTot=[{}] \n unknownKey:[{}]",
+                    allKeyTot, nodeMap.size(), nodeMap.keySet());
         }
 
         // 先【部分树】Add至【完整树】 （走一遍排序的代码）
-        if (CollUtil.isNotEmpty(nonParentData)) rootTrees.addAll(nonParentData.values());
+        if (CollUtil.isNotEmpty(nodeMap)) rootTrees.addAll(nodeMap.values());
         if (CollUtil.isNotEmpty(rootTrees)) TreeUtil.buildChildren(rootTrees, results, clazz);
         return results;
 

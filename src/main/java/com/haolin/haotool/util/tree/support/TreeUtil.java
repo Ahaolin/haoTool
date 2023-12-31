@@ -18,12 +18,13 @@ public class TreeUtil {
 
     public static <M, N extends ITreeVO<N, M>> void buildChildren(Collection<Tree<M>> build, List<N> results, Class<N> clazz) {
         build.forEach(v -> {
-            final N result = getResult(clazz, v);
+            final N result = reflectGetResult(clazz, v);
             result.restoreData(v);
+
             final List<Tree<M>> children = v.getChildren();
             if (CollectionUtil.isNotEmpty(children)) {
                 result.setChildren(new ArrayList<>());
-                buildChildren(children, result.getChildren(), clazz);
+                TreeUtil.buildChildren(children, result.getChildren(), clazz);
             }
             results.add(result);
         });
@@ -51,8 +52,8 @@ public class TreeUtil {
     private final static  Map<Class<?>,Holder<Constructor<?>>> CACHE_CONSTRUCTOR = new ConcurrentHashMap<>();
 
     @SuppressWarnings({"unchecked"})
-    public static <N extends ITreeVO<N, M>, M> N getResult(Class<N> clazz, Tree<M> v) {
-        Objects.requireNonNull(clazz, "getResult() class must not null!");
+    public static <N extends ITreeVO<N, M>, M> N reflectGetResult(Class<N> clazz, Tree<M> v) {
+        Objects.requireNonNull(clazz, "reflectGetResult() class must not null!");
         Holder<Constructor<?>> holder = CACHE_CONSTRUCTOR.get(clazz);
         if (holder == null) {
             CACHE_CONSTRUCTOR.putIfAbsent(clazz, new Holder<>());

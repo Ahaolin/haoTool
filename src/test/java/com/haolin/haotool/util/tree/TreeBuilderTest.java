@@ -123,7 +123,7 @@ public class TreeBuilderTest {
         watch.start("holder");
         Tree<String> tree = new Tree<>();
         for (long i = 0; i < 1000000000L; i++) {
-            TreeUtil.getResult(SysOrgDeptTreeDTO.class, tree);
+            TreeUtil.reflectGetResult(SysOrgDeptTreeDTO.class, tree);
         }
         watch.stop();
         LOGGER.info("=== holder name execute 【{}】ms", watch.getTotalTimeMillis());
