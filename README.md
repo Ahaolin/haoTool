@@ -119,5 +119,4 @@ public String demo1(){
   List<SysOrgDeptTreeDTO> treeDto = ExtensionLoader.getExtensionLoader(TreeBuilder.class).getAdaptiveExtension()
                   .covertTree(url, treeNodes, "0", SysOrgDeptTreeDTO.class, TreeBuilder.DEFAULT_STRING_NODE_PARSER);
   ```
-
-  
+- 完成了`二进制标记`的工具类 ： `StateFeature`
