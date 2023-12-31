@@ -1,0 +1,3 @@
+spel=com.haolin.haotool.util.expression.support.SpELExpressionEngine
+aviator=com.haolin.haotool.util.expression.support.AviatorExpressionEngine
+adaptive=com.haolin.haotool.util.expression.support.AdaptiveExpressionEngine

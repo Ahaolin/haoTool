@@ -65,7 +65,7 @@ import java.util.regex.Pattern;
  * @see Adaptive
  * @see Activate
  */
-//@SuppressWarnings("deprecation")
+@SuppressWarnings("deprecation")
 public class ExtensionLoader<T> {
 
     private static final Logger logger = LoggerFactory.getLogger(ExtensionLoader.class);
