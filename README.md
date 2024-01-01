@@ -120,3 +120,4 @@ public String demo1(){
                   .covertTree(url, treeNodes, "0", SysOrgDeptTreeDTO.class, TreeBuilder.DEFAULT_STRING_NODE_PARSER);
   ```
 - 完成了`二进制标记`的工具类 ： `StateFeature`
+- 完成了`本地上下文`的工具类 ： `DefaultContext`

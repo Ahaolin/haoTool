@@ -8,6 +8,9 @@ import cn.hutool.core.lang.tree.Tree;
 import com.alibaba.fastjson.JSON;
 import com.haolin.haotool.extension.ExtensionLoader;
 import com.haolin.haotool.extension.URL;
+import com.haolin.haotool.util.context.IBaseContext;
+import com.haolin.haotool.util.context.NameFunction;
+import com.haolin.haotool.util.context.impl.DefaultContext;
 import com.haolin.haotool.util.tree.support.TreeUtil;
 import com.haolin.haotool.util.tree.support.TreeUtilBackUp;
 import lombok.AllArgsConstructor;
@@ -24,10 +27,7 @@ import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -57,6 +57,13 @@ public class TreeBuilderTest {
                 TreeUtilBackUp.wrapperNonDataNodeParser(TreeUtilBackUp.DEFAULT_STRING_NODE_PARSER));
 
         Assertions.assertNotNull(treeDto);
+
+        DefaultContext context = new DefaultContext();
+        TreeNode firstData = treeNodes.get(0);
+//        context.with(DefaultContextRef::getNum).computeIfAbsent(()-> 1);
+        context.with((ITreeVO<String,Object> defaultContextRef) -> defaultContextRef.covertTreeNode()).set(firstData);
+        Map<String, Object> contextMap = context.getContextMap();
+        System.out.println();
     }
 
     /**
